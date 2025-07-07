@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Note</string>
+    <string name="icon_login">icon login</string>
+    <string name="user_name">نام کاربری</string>
+    <string name="password">رمز</string>
+    <string name="save">ذخیره</string>
+    <string name="enter">ورود</string>
+    <string name="enter_message">خوش آمدید!</string>
+    <string name="enter_pass_user">لطفا رمز و نام کاربری را وارد نمایید!</string>
+    <string name="do_not_enter_space">لطفا در رمز و نام کاربری حرف فاصله وارد نکنید!</string>
+    <string name="register">ثبت نام</string>
+    <string name="pass_user_wrong">رمز عبور یا نام کاربری اشتباه است!!</string>
+    <string name="todo">todo</string>
+    <string name="newNote">یادداشت جدید</string>
+    <string name="description">شرح</string>
+    <string name="title">عنوان</string>
+    <string name="addPicture">اضافه کردن عکس</string>
+</resources>
