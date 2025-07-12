@@ -15,4 +15,6 @@
     <string name="description">شرح</string>
     <string name="title">عنوان</string>
     <string name="addPicture">اضافه کردن عکس</string>
+    <string name="notes">یادداشت ها</string>
+    <string name="recycle_bin">سطل زباله</string>
 </resources>

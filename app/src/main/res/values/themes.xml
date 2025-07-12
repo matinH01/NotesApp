@@ -13,4 +13,11 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="CustomTabLayout" parent="Widget.Material3.TabLayout">
+        <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
+    </style>
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/iran_yekan_mobile_extra_bold_number</item>
+    </style>
 </resources>
