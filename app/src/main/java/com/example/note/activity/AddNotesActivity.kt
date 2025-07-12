@@ -66,7 +66,7 @@ class AddNotesActivity : AppCompatActivity() {
         onBackButtonPressed {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            true
+            false
         }
 
         notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
@@ -92,7 +92,7 @@ class AddNotesActivity : AppCompatActivity() {
         notesDao.insertNotes(notesData)
     }
 
-    private fun Activity.onBackButtonPressed(callback: (() -> Boolean)) {
+    private fun onBackButtonPressed(callback: (() -> Boolean)) {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.addCallback(
             this,
             object : OnBackPressedCallback(true) {
@@ -105,7 +105,7 @@ class AddNotesActivity : AppCompatActivity() {
             })
     }
 
-    fun Activity.performBackPress() {
+    fun performBackPress() {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.onBackPressed()
     }
 
