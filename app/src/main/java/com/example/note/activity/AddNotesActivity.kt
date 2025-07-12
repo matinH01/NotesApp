@@ -39,7 +39,6 @@ class AddNotesActivity : AppCompatActivity() {
         binding = ActivityAddNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
-
     }
 
     private fun saveNotes() {
