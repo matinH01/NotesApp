@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,11 +13,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
 import com.example.note.database.NotesDao
@@ -96,27 +92,6 @@ class AddNotesActivity : AppCompatActivity() {
         notesDao.insertNotes(notesData)
     }
 
-    private fun permissionPass(): Boolean {
-        val permissionListWeNeed = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val notificationPermission = ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.POST_NOTIFICATIONS
-            )
-            if (notificationPermission != PackageManager.PERMISSION_GRANTED) {
-                permissionListWeNeed.add(android.Manifest.permission.POST_NOTIFICATIONS)
-            }
-        }
-
-
-
-        if (permissionListWeNeed.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, permissionListWeNeed.toTypedArray(), 1)
-            return false
-        }
-        return true
-    }
-
     private fun Activity.onBackButtonPressed(callback: (() -> Boolean)) {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.addCallback(
             this,
@@ -133,14 +108,6 @@ class AddNotesActivity : AppCompatActivity() {
     fun Activity.performBackPress() {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.onBackPressed()
     }
-
-    private var resultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                // There are no request codes
-                val data: Intent? = result.data
-            }
-        }
 
     private fun showNotification(title: String, text: String) {
         val channelId = "notification"
