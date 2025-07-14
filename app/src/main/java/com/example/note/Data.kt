@@ -1,5 +1,6 @@
 package com.example.note
 
-class Data {
-
-}
+data class Data(
+    val time: String,
+    val date: String
+)
