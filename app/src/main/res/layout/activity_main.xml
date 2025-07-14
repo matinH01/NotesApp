@@ -40,13 +40,14 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         style="@style/CustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#f8ecdf"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#f8ecdf"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="#A16145"
         app:tabIndicatorFullWidth="false"
@@ -65,4 +66,16 @@
             android:layout_height="wrap_content"
             android:text="@string/recycle_bin" />
     </com.google.android.material.tabs.TabLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        tools:text="زمان" />
 </androidx.constraintlayout.widget.ConstraintLayout>
