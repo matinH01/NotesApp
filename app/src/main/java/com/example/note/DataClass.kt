@@ -1,5 +1,5 @@
 package com.example.note
 
-class DataClass {
-
-}
+data class DataClass(
+    val gold: List<Data>
+)
