@@ -42,8 +42,11 @@ android {
 }
 dependencies {
 
-    implementation (libs.glide)
-    implementation (libs.neumorphism)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    implementation(libs.glide)
+    implementation(libs.neumorphism)
 
     implementation(libs.androidx.room.runtime)
 
