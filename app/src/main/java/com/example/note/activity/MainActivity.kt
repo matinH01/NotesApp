@@ -3,6 +3,7 @@ package com.example.note.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note.ApiService
@@ -56,9 +57,12 @@ class MainActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
-                val jsonObject = JSONObject(response.body()!!)
-                binding.textView2.text =
-                    "${jsonObject.getJSONArray("gold").getJSONObject(0).get("date")}"
+                if (response.body() != null && response.isSuccessful) {
+                    val jsonObject = JSONObject(response.body()!!)
+                    binding.txtDate.text =
+                        "${jsonObject.getJSONArray("gold").getJSONObject(0).get("date")}"
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
