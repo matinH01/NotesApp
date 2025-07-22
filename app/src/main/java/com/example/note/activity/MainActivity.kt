@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note.ApiService
+import com.example.note.R
 import com.example.note.adapter.MyAdapter
 import com.example.note.database.NotesDao
 import com.example.note.database.NotesDatabase
@@ -23,8 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var notesDao: NotesDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
         val noteData = selectFromDb()
@@ -37,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val adapter = MyAdapter(this, noteData)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
+        binding.layoutManager = LinearLayoutManager(this)
+        binding.adapter = adapter
 
         getTimeFromServer()
 
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.body() != null && response.isSuccessful) {
                     val jsonObject = JSONObject(response.body()!!)
-                    binding.txtDate.text =
+                    binding.textDate =
                         "${jsonObject.getJSONArray("gold").getJSONObject(0).get("date")}"
-                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.visibility = View.INVISIBLE
                 }
             }
 
