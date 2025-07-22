@@ -1,6 +1,5 @@
 package com.example.note.activity
 
-import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -15,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
 import com.example.note.database.NotesDao
@@ -28,13 +28,42 @@ class AddNotesActivity : AppCompatActivity() {
     private lateinit var btnSave: Button
     private lateinit var edtTitle: EditText
     private lateinit var edtDescription: EditText
+    private val channelId = "notification"
+    private val channelName = "General Notifications"
     private var addOrShow = true
     private var whichItem = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddNotesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_notes)
         init()
+    }
+
+    private fun init() {
+        bindViews()
+        onBackButtonPressed {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            false
+        }
+
+        notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
+        addOrShow = intent.extras!!.getBoolean("AddOrShow")
+        whichItem = intent.extras!!.getInt("WhichItem")
+
+        if (addOrShow) {
+            btnSave.setOnClickListener {
+                saveNotes()
+            }
+        } else {
+            showNotes()
+        }
+    }
+
+
+    private fun bindViews() {
+        btnSave = binding.btnSave
+        edtTitle = binding.edtTitle
+        edtDescription = binding.edtDescription
     }
 
     private fun saveNotes() {
@@ -61,36 +90,41 @@ class AddNotesActivity : AppCompatActivity() {
         btnSave.visibility = View.INVISIBLE
     }
 
-    private fun init() {
-        bindViews()
-        onBackButtonPressed {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            false
-        }
-
-        notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
-        addOrShow = intent.extras!!.getBoolean("AddOrShow")
-        whichItem = intent.extras!!.getInt("WhichItem")
-
-        if (addOrShow) {
-            btnSave.setOnClickListener {
-                saveNotes()
-            }
-        } else {
-            showNotes()
-        }
-    }
-
-    private fun bindViews() {
-        btnSave = binding.btnSave
-        edtTitle = binding.edtTitle
-        edtDescription = binding.edtDescription
-    }
 
     private fun insertToDb(notesData: NotesData) {
         notesDao.insertNotes(notesData)
     }
+
+
+    private fun showNotification(title: String, text: String) {
+        val notification = NotificationCompat.Builder(this, channelId)
+        notification.setSmallIcon(R.drawable.note_icon)
+        notification.setContentTitle(title)
+        notification.setContentText(text)
+
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        createChannel(notificationManager)
+        notificationManager.notify(0, notification.build())
+    }
+
+    private fun createChannel(notificationManager: NotificationManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel =
+                NotificationChannel(
+                    channelId,
+                    channelName,
+                    NotificationManager.IMPORTANCE_HIGH
+                ).apply {
+                    description = "Channel for general app notifications"
+                    lightColor = Color.RED
+                    enableVibration(true)
+                }
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 
     private fun onBackButtonPressed(callback: (() -> Boolean)) {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.addCallback(
@@ -107,34 +141,5 @@ class AddNotesActivity : AppCompatActivity() {
 
     fun performBackPress() {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.onBackPressed()
-    }
-
-    private fun showNotification(title: String, text: String) {
-        val channelId = "notification"
-        val channelName = "General Notifications"
-        val notification = NotificationCompat.Builder(this, channelId)
-        notification.setSmallIcon(R.drawable.note_icon)
-        notification.setAutoCancel(true)
-        notification.setContentTitle(title)
-        notification.setContentText(text)
-
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel =
-                NotificationChannel(
-                    channelId,
-                    channelName,
-                    NotificationManager.IMPORTANCE_HIGH
-                ).apply {
-                    description = "Channel for general app notifications"
-                    enableLights(true)
-                    lightColor = Color.RED
-                    enableVibration(true)
-                }
-            notificationManager.createNotificationChannel(channel)
-        }
-        notificationManager.notify(0, notification.build())
     }
 }
