@@ -3,6 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="visibility"
+            type="Integer" />
+
+        <variable
+            name="layoutManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <variable
+            name="adapter"
+            type="com.example.note.adapter.MyAdapter" />
+
+        <variable
+            name="textDate"
+            type="String" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -14,10 +33,12 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layoutManager="@{layoutManager}"
             android:layout_marginStart="16dp"
             android:layout_marginTop="128dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="128dp"
+            android:adapter="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -74,21 +95,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
+            android:text="@{textDate}"
             android:textColor="@color/texts_color"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-            tools:text="زمان" />
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            app:indicatorSize="48dp"
+            android:visibility="@{visibility}"
             app:indicatorColor="@color/texts_color"
+            app:indicatorSize="48dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtDate"
             app:layout_constraintEnd_toEndOf="@+id/txtDate"
             app:layout_constraintStart_toStartOf="@+id/txtDate"
