@@ -11,6 +11,7 @@ import com.example.note.ApiService
 import com.example.note.R
 import com.example.note.adapter.MyAdapter
 import com.example.note.database.NotesDao
+import com.example.note.database.NotesData
 import com.example.note.database.NotesDatabase
 import com.example.note.databinding.ActivityMainBinding
 import org.json.JSONObject
@@ -31,18 +32,26 @@ class MainActivity : AppCompatActivity() {
         val noteData = selectFromDb()
 
         binding.floatingActionButton.setOnClickListener {
-            val intent = Intent(this, AddNotesActivity::class.java)
-            intent.putExtra("AddOrShow", true)
-            startActivity(intent)
-            finish()
+            goToAddNotesActivity()
         }
 
-        val adapter = MyAdapter(this, noteData)
-        binding.layoutManager = LinearLayoutManager(this)
-        binding.adapter = adapter
+        setRecyclerViewAdapter(noteData)
 
         getTimeFromServer()
 
+    }
+
+    private fun goToAddNotesActivity() {
+        val intent = Intent(this, AddNotesActivity::class.java)
+        intent.putExtra("AddOrShow", true)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun setRecyclerViewAdapter(noteData: MutableList<NotesData>) {
+        val adapter = MyAdapter(this, noteData)
+        binding.layoutManager = LinearLayoutManager(this)
+        binding.adapter = adapter
     }
 
     private fun selectFromDb() = notesDao.getAllNotes()
