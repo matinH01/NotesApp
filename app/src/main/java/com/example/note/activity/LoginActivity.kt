@@ -3,6 +3,7 @@ package com.example.note.activity
 import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.SharedPreferences.Editor
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.example.note.R
 import com.example.note.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -18,13 +20,12 @@ import com.google.android.material.snackbar.Snackbar
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var preferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
+    private lateinit var editor: Editor
     private lateinit var intent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         requestNotificationPermission()
         intent = Intent(this, MainActivity::class.java)
         preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
