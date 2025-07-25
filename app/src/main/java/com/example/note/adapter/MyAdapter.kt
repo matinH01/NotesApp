@@ -41,7 +41,7 @@ class MyAdapter(
         holder.binding.root.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("WhichItem", position)
-            intent.putExtra("AddOrShow", false)
+            intent.putExtra("Show", true)
             context.startActivity(intent)
         }
     }
