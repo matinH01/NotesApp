@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.note.view.AddNotesActivity
+import com.example.note.databinding.RecyclerLayoutBinding
 import com.example.note.model.NotesData
 import com.example.note.model.NotesDatabase
-import com.example.note.databinding.RecyclerLayoutBinding
+import com.example.note.view.MainActivity
 
 class MyAdapter(
     private val context: Context,
@@ -39,7 +39,7 @@ class MyAdapter(
             notifyItemRangeChanged(position, noteData.size)
         }
         holder.binding.root.setOnClickListener {
-            val intent = Intent(context, AddNotesActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("WhichItem", position)
             intent.putExtra("AddOrShow", false)
             context.startActivity(intent)
