@@ -1,4 +1,4 @@
-package com.example.note.activity
+package com.example.note.view
 
 import android.Manifest
 import android.content.Intent

@@ -21,10 +21,10 @@
         android:theme="@style/Theme.Note"
         tools:targetApi="31">
         <activity
-            android:name=".activity.AddNotesActivity"
+            android:name=".view.AddNotesActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="false" />
     </application>
 

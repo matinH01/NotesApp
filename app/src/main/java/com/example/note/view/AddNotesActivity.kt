@@ -1,4 +1,4 @@
-package com.example.note.activity
+package com.example.note.view
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -17,9 +17,9 @@ import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
-import com.example.note.database.NotesDao
-import com.example.note.database.NotesData
-import com.example.note.database.NotesDatabase
+import com.example.note.model.NotesDao
+import com.example.note.model.NotesData
+import com.example.note.model.NotesDatabase
 import com.example.note.databinding.ActivityAddNotesBinding
 
 class AddNotesActivity : AppCompatActivity() {

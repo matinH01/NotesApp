@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.note.activity.AddNotesActivity
-import com.example.note.database.NotesData
-import com.example.note.database.NotesDatabase
+import com.example.note.view.AddNotesActivity
+import com.example.note.model.NotesData
+import com.example.note.model.NotesDatabase
 import com.example.note.databinding.RecyclerLayoutBinding
 
 class MyAdapter(

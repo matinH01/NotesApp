@@ -1,4 +1,4 @@
-package com.example.note.activity
+package com.example.note.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note.ApiService
 import com.example.note.R
 import com.example.note.adapter.MyAdapter
-import com.example.note.database.NotesDao
-import com.example.note.database.NotesData
-import com.example.note.database.NotesDatabase
+import com.example.note.model.NotesDao
+import com.example.note.model.NotesData
+import com.example.note.model.NotesDatabase
 import com.example.note.databinding.ActivityMainBinding
 import org.json.JSONObject
 import retrofit2.Call
