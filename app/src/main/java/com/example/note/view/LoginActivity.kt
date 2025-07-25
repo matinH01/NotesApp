@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         requestNotificationPermission()
         intent = Intent(this, MainActivity::class.java)
         preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
-        editor = preferences.edit()
+        editor = preferences.edit()     
         editor.apply()
 
         if (preferences.getBoolean("appOpenBefore", false)) {
