@@ -27,7 +27,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
+            android:id="@+id/layout_main"
             android:layout_width="match_parent"
             android:visibility="visible"
             android:layout_height="match_parent"
@@ -129,6 +129,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_add_notes"
             android:layout_width="match_parent"
             android:visibility="invisible"
             android:layout_height="match_parent"
@@ -137,7 +138,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".view.AddNotesActivity">
+            tools:context=".view.MainActivity">
 
             <View
                 android:id="@+id/view2"
