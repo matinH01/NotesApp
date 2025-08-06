@@ -22,211 +22,108 @@
             type="String" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".view.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main"
-            android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="match_parent"
-            android:background="@color/background_color"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="128dp"
+            android:adapter="@{adapter}"
+            app:layoutManager="@{layoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/recycler_layout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#f8ecdf"
+            android:contentDescription="@string/todo"
+            app:cornerRadius="16dp"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="#A16145"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            style="@style/CustomTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f8ecdf"
+            android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".view.MainActivity">
+            app:tabIndicatorColor="#A16145"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="3dp"
+            app:tabRippleColor="#1F000000"
+            app:tabSelectedTextColor="#A16145"
+            app:tabTextColor="#A16145">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="128dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="128dp"
-                android:adapter="@{adapter}"
-                app:layoutManager="@{layoutManager}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/recycler_layout" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#f8ecdf"
-                android:contentDescription="@string/todo"
-                app:cornerRadius="16dp"
-                app:icon="@android:drawable/ic_input_add"
-                app:iconGravity="textStart"
-                app:iconPadding="0dp"
-                app:iconTint="#A16145"
-                app:layout_constraintStart_toStartOf="@+id/recyclerView"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                style="@style/CustomTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#f8ecdf"
-                android:elevation="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tabIndicatorColor="#A16145"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="3dp"
-                app:tabRippleColor="#1F000000"
-                app:tabSelectedTextColor="#A16145"
-                app:tabTextColor="#A16145">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/notes" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recycle_bin" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <TextView
-                android:id="@+id/txtDate"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
-                android:text="@{textDate}"
-                android:textColor="@color/texts_color"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+                android:text="@string/notes" />
 
-            <com.google.android.material.progressindicator.CircularProgressIndicator
-                android:id="@+id/progressBar"
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="@{visibility}"
-                app:indicatorColor="@color/texts_color"
-                app:indicatorSize="48dp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDate"
-                app:layout_constraintEnd_toEndOf="@+id/txtDate"
-                app:layout_constraintStart_toStartOf="@+id/txtDate"
-                app:layout_constraintTop_toTopOf="@+id/txtDate"
-                app:trackColor="#F0D4C8"
-                app:trackCornerRadius="48dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="@string/recycle_bin" />
+        </com.google.android.material.tabs.TabLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_add_notes"
-            android:layout_width="match_parent"
-            android:visibility="invisible"
-            android:layout_height="match_parent"
-            android:background="@color/background_color"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
+            android:text="@{textDate}"
+            android:textColor="@color/texts_color"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:context=".view.MainActivity">
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="128dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="128dp"
-                android:background="@drawable/back_note_layout"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
-                android:text="@string/newNote"
-                android:textColor="@color/texts_color"
-                android:textSize="32sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_title"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/add_note_edit_texts"
-                android:elevation="4dp"
-                android:ems="10"
-                android:fontFamily="@font/iran_yekan_mobile_bold_numerals"
-                android:hint="@string/title"
-                android:inputType="text"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/texts_color"
-                android:textDirection="rtl"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_description"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="48dp"
-                android:background="@drawable/add_note_edit_texts"
-                android:elevation="4dp"
-                android:fontFamily="@font/iran_yekan_mobile_bold_numerals"
-                android:gravity="top|start"
-                android:hint="@string/description"
-                android:inputType="textMultiLine"
-                android:maxEms="10"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="@color/texts_color"
-                android:textDirection="rtl"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/edt_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/edt_title"
-                app:layout_constraintTop_toBottomOf="@+id/edt_title" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_save"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#a06043"
-                android:fontFamily="@font/iran_yekan_mobile_bold"
-                android:text="@string/save"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:cornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{visibility}"
+            app:indicatorColor="@color/texts_color"
+            app:indicatorSize="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDate"
+            app:layout_constraintEnd_toEndOf="@+id/txtDate"
+            app:layout_constraintStart_toStartOf="@+id/txtDate"
+            app:layout_constraintTop_toTopOf="@+id/txtDate"
+            app:trackColor="#F0D4C8"
+            app:trackCornerRadius="48dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
