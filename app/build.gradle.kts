@@ -43,6 +43,8 @@ android {
 }
 dependencies {
 
+    implementation(libs.sdp.android)
+
     implementation(libs.retrofit)
     implementation(libs.converter.scalars)
     implementation(libs.converter.gson)
