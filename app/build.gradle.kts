@@ -42,7 +42,7 @@ android {
     }
 }
 dependencies {
-
+    implementation(libs.ssp.android)
     implementation(libs.sdp.android)
 
     implementation(libs.retrofit)
