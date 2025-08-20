@@ -2,7 +2,6 @@ package com.example.note.view
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -17,10 +16,10 @@ import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
+import com.example.note.databinding.ActivityAddNotesBinding
 import com.example.note.model.NotesDao
 import com.example.note.model.NotesData
 import com.example.note.model.NotesDatabase
-import com.example.note.databinding.ActivityAddNotesBinding
 
 class AddNotesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNotesBinding
@@ -103,7 +102,7 @@ class AddNotesActivity : AppCompatActivity() {
         notification.setContentText(text)
 
         val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         createChannel(notificationManager)
         notificationManager.notify(0, notification.build())
