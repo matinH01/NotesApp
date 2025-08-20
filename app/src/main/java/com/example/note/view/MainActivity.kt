@@ -1,5 +1,6 @@
 package com.example.note.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(this, AddNotesActivity::class.java)
+            startActivity(intent)
         }
 
         getTimeFromServer()
