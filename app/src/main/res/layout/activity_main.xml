@@ -53,8 +53,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/floatingActionButton"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_60sdp"
             android:layout_marginTop="@dimen/_32sdp"
             android:backgroundTint="#f8ecdf"
             android:contentDescription="@string/todo"
@@ -94,33 +94,6 @@
                 android:text="@string/recycle_bin" />
         </com.google.android.material.tabs.TabLayout>
 
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
-            android:text="@{textDate}"
-            android:textColor="@color/texts_color"
-            android:textSize="@dimen/_24ssp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="@{visibility}"
-            app:indicatorColor="@color/texts_color"
-            app:indicatorSize="@dimen/_48sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtDate"
-            app:layout_constraintEnd_toEndOf="@+id/txtDate"
-            app:layout_constraintStart_toStartOf="@+id/txtDate"
-            app:layout_constraintTop_toTopOf="@+id/txtDate"
-            app:trackColor="#F0D4C8"
-            app:trackCornerRadius="@dimen/_48sdp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
