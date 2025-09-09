@@ -37,7 +37,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtPassword"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/back_login_views"
             android:elevation="@dimen/_4sdp"
@@ -58,7 +58,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtUsername"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginStart="@dimen/_49sdp"
             android:layout_marginEnd="@dimen/_49sdp"
             android:background="@drawable/back_login_views"
