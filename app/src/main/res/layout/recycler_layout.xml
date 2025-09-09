@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="5dp">
+    android:layout_margin="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_8sdp"
+    app:cardCornerRadius="@dimen/_16sdp"
+    app:cardElevation="@dimen/_4sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/_77sdp"
         android:backgroundTint="#f8ecdf"
         android:background="@drawable/back_items">
 
@@ -19,15 +19,13 @@
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_18sdp"
             android:fontFamily="@font/iran_yekan_mobile_bold_numerals"
             android:textColor="@color/texts_color"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_18ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             tools:text="عنوان" />
 
         <TextView
@@ -36,16 +34,16 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_yekan_mobile_regular_number"
             android:textColor="@color/texts_color"
-            android:textSize="16sp"
+            android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="@+id/txtTitle"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle"
             tools:text="توضیحات" />
 
         <ImageButton
             android:id="@+id/imgDelete"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="@dimen/_37sdp"
+            android:layout_height="@dimen/_37sdp"
+            android:layout_marginStart="@dimen/_7sdp"
             android:background="@drawable/back_icon"
             android:clickable="true"
             android:contentDescription="@string/todo"
