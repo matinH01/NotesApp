@@ -1,3 +1,7 @@
 package com.example.note.state
 
-data class NoteUiState()
+data class NoteUiState(
+    val title: String,
+    val description: String,
+    val showOrAdd: Boolean
+)
