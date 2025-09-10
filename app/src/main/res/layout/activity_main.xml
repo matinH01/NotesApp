@@ -6,20 +6,8 @@
     <data>
 
         <variable
-            name="visibility"
-            type="Integer" />
-
-        <variable
-            name="layoutManager"
-            type="androidx.recyclerview.widget.LinearLayoutManager" />
-
-        <variable
-            name="adapter"
-            type="com.example.note.adapter.MyAdapter" />
-
-        <variable
-            name="textDate"
-            type="String" />
+            name="viewModel"
+            type="com.example.note.viewModel.NotesViewModel" />
     </data>
 
 
@@ -43,8 +31,6 @@
             android:layout_marginTop="@dimen/_128sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_128sdp"
-            android:adapter="@{adapter}"
-            app:layoutManager="@{layoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
