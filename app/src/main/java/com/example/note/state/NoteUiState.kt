@@ -1,7 +1,8 @@
 package com.example.note.state
 
 data class NoteUiState(
-    val title: String,
-    val description: String,
-    val showOrAdd: Boolean
+    var title: String = "",
+    var description: String = "",
+    var showOrAdd: Boolean = true,
+    var topPageText: String = "یادداشت جدید"
 )
