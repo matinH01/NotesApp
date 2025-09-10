@@ -12,11 +12,13 @@ import com.example.note.databinding.ActivityMainBinding
 import com.example.note.model.NotesDao
 import com.example.note.model.NotesData
 import com.example.note.model.NotesDatabase
+import com.example.note.viewModel.NotesViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var notesDao: NotesDao
     private lateinit var adapter: MyAdapter
+    private val viewModel = NotesViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         setRecyclerViewAdapter(noteData)
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(this, AddNotesActivity::class.java)
             intent.putExtra("AddOrShow", true)
@@ -36,8 +41,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecyclerViewAdapter(noteData: MutableList<NotesData>) {
         adapter = MyAdapter(this, noteData)
-        binding.layoutManager = LinearLayoutManager(this)
-        binding.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = adapter
     }
 
     private fun selectFromDb() = notesDao.getAllNotes()
