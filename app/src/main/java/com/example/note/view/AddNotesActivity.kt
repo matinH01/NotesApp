@@ -7,8 +7,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -20,13 +18,12 @@ import com.example.note.databinding.ActivityAddNotesBinding
 import com.example.note.model.NotesDao
 import com.example.note.model.NotesData
 import com.example.note.model.NotesDatabase
+import com.example.note.viewModel.NotesViewModel
 
 class AddNotesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNotesBinding
     private lateinit var notesDao: NotesDao
-    private lateinit var btnSave: Button
-    private lateinit var edtTitle: EditText
-    private lateinit var edtDescription: EditText
+    private val viewModel = NotesViewModel()
     private val channelId = "notification"
     private val channelName = "General Notifications"
     private var addOrShow = true
@@ -38,55 +35,45 @@ class AddNotesActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        bindViews()
         onBackButtonPressed {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             false
         }
-
         notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
         addOrShow = intent.extras!!.getBoolean("AddOrShow")
         whichItem = intent.extras!!.getInt("WhichItem")
 
-        if (addOrShow) {
-            btnSave.setOnClickListener {
-                saveNotes()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.uiState.observe(this) { noteUiState ->
+            noteUiState.showOrAdd = addOrShow
+            noteUiState.title = binding.edtTitle.text.toString()
+            noteUiState.description = binding.edtDescription.text.toString()
+            if (noteUiState.showOrAdd) {
+                if (noteUiState.title.isNotEmpty() && noteUiState.description.isNotEmpty()) {
+                    insertToDb(
+                        NotesData(
+                            title = noteUiState.title,
+                            description = noteUiState.description
+                        )
+                    )
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    showNotification()
+                    finish()
+                } else {
+                    Toast.makeText(this, "لطفا عنوان و شرح را وارد کنید!!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            } else {
+                noteUiState.title = notesDao.getAllNotes()[whichItem].title
+                noteUiState.description = notesDao.getAllNotes()[whichItem].description
+                binding.btnSave.visibility = View.INVISIBLE
             }
-        } else {
-            showNotes()
         }
-    }
 
-
-    private fun bindViews() {
-        btnSave = binding.btnSave
-        edtTitle = binding.edtTitle
-        edtDescription = binding.edtDescription
-    }
-
-    private fun saveNotes() {
-        val title = edtTitle.text.toString()
-        val description = edtDescription.text.toString()
-        if (title.isNotEmpty() && description.isNotEmpty()) {
-            insertToDb(NotesData(title = title, description = description))
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            showNotification("یادداشت", "یادداشت با موفقیت ذخیره شد!!")
-            finish()
-        } else {
-            Toast.makeText(this, "Please enter title and description", Toast.LENGTH_SHORT)
-                .show()
-        }
-    }
-
-    private fun showNotes() {
-        binding.textView.text = "نمایش یادداشت"
-        edtTitle.isEnabled = false
-        edtDescription.isEnabled = false
-        edtTitle.setText(notesDao.getAllNotes()[whichItem].title)
-        edtDescription.setText(notesDao.getAllNotes()[whichItem].description)
-        btnSave.visibility = View.INVISIBLE
     }
 
 
@@ -94,12 +81,11 @@ class AddNotesActivity : AppCompatActivity() {
         notesDao.insertNotes(notesData)
     }
 
-
-    private fun showNotification(title: String, text: String) {
+    private fun showNotification() {
         val notification = NotificationCompat.Builder(this, channelId)
         notification.setSmallIcon(R.drawable.note_icon)
-        notification.setContentTitle(title)
-        notification.setContentText(text)
+        notification.setContentTitle("یادداشت")
+        notification.setContentText("یادداشت با موفقیت ذخیره شد!!")
 
         val notificationManager =
             getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -123,7 +109,6 @@ class AddNotesActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
 
     private fun onBackButtonPressed(callback: (() -> Boolean)) {
         (this as? FragmentActivity)?.onBackPressedDispatcher?.addCallback(
