@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.note.viewModel.NotesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +22,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_26sdp"
-            android:layout_marginEnd="@dimen/_26sdp"
             android:layout_marginTop="@dimen/_26sdp"
+            android:layout_marginEnd="@dimen/_26sdp"
             android:layout_marginBottom="@dimen/_100sdp"
             android:background="@drawable/back_note_layout"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
-            android:text="@string/newNote"
+            android:text="@{viewModel.uiState.topPageText}"
             android:textColor="@color/texts_color"
             android:textSize="@dimen/_28ssp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +98,7 @@
             android:layout_marginTop="@dimen/_26sdp"
             android:backgroundTint="#a06043"
             android:fontFamily="@font/iran_yekan_mobile_bold"
+            android:onClick="@{() -> viewModel.setData()}"
             android:text="@string/save"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
