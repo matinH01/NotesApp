@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -42,32 +43,28 @@ android {
     }
 }
 dependencies {
-    implementation(libs.ssp.android)
-    implementation(libs.sdp.android)
-
-    implementation(libs.retrofit)
-    implementation(libs.converter.scalars)
-    implementation(libs.converter.gson)
-
-    implementation(libs.glide)
-    implementation(libs.neumorphism)
-
-    implementation(libs.androidx.room.runtime)
-
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    ksp(libs.androidx.room.compiler)
-
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation(libs.androidx.room.ktx)
-
-    //noinspection UseTomlInstead
-    implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    //added libraries
+    implementation(libs.ssp.android)
+    implementation(libs.sdp.android)
+    implementation(libs.retrofit)
+    implementation(libs.converter.scalars)
+    implementation(libs.converter.gson)
+    implementation(libs.glide)
+    implementation(libs.neumorphism)
+    implementation(libs.androidx.room.runtime)
+    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+    ksp(libs.androidx.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compiler)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
