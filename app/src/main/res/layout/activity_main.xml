@@ -7,9 +7,8 @@
 
         <variable
             name="viewModel"
-            type="com.example.note.viewModel.NotesViewModel" />
+            type="com.example.note.view_model.MainViewModel" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_main"
@@ -31,6 +30,8 @@
             android:layout_marginTop="@dimen/_128sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_128sdp"
+            android:adapter="@{viewModel.mainUiState.adapter}"
+            app:layoutManager="@{viewModel.mainUiState.layoutManager}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
