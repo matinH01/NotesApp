@@ -2,13 +2,11 @@ package com.example.note.app
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.stateholosen.dao.UserDao
-import com.example.stateholosen.model.User
+import com.example.note.dao.NotesDao
+import com.example.note.model.NotesData
 
-@Database(version = 5, entities = [User::class])
+@Database(version = 1, entities = [NotesData::class])
 abstract class NoteDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
+    abstract fun noteDao(): NotesDao
 
 }
