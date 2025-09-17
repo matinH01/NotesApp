@@ -12,27 +12,31 @@ import com.example.note.view.AddNotesActivity
 
 class MyAdapter(
     private val context: Context,
-    private val noteData: MutableList<NotesData>
+    private val onDeleteClick: (NotesData) -> Unit
 ) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
-
-    private val notesDao = NotesDatabase.buildDatabase(context).getNotesDao()
+    private var noteData = mutableListOf<NotesData>()
+    fun submitList(list: MutableList<NotesData>) {
+        noteData = list
+        notifyDataSetChanged()
+    }
 
     inner class MyViewHolder(val binding: RecyclerLayoutBinding) : ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder =
         MyViewHolder(
             RecyclerLayoutBinding.inflate(
-                LayoutInflater.from(context), parent, false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
 
     override fun getItemCount() = noteData.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.txtTitle.text = noteData[position].title
-        holder.binding.txtDescription.text = noteData[position].description
+        val note = noteData[position]
+        holder.binding.txtTitle.text = note.title
+        holder.binding.txtDescription.text = note.description
         holder.binding.imgDelete.setOnClickListener {
-            notesDao.deleteNotes(noteData[position])
+            onDeleteClick(note)
             noteData.removeAt(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, noteData.size)
