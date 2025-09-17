@@ -1,3 +1,7 @@
 package com.example.note.state
 
-data class MainUiState()
+import com.example.note.adapter.MyAdapter
+
+data class MainUiState(
+    var adapter: MyAdapter? = null
+)
