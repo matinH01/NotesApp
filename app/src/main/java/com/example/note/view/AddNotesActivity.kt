@@ -2,32 +2,29 @@ package com.example.note.view
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
+import com.example.note.dao.NotesDao
 import com.example.note.databinding.ActivityAddNotesBinding
-import com.example.note.model.NotesDao
-import com.example.note.model.NotesData
-import com.example.note.model.NotesDatabase
-import com.example.note.viewModel.NotesViewModel
+import com.example.note.view_model.AddNotesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddNotesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddNotesBinding
-    private lateinit var notesDao: NotesDao
-    private val viewModel = NotesViewModel()
     private val channelId = "notification"
     private val channelName = "General Notifications"
-    private var addOrShow = true
-    private var whichItem = 0
+    private val viewModel: AddNotesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_notes)
@@ -36,31 +33,22 @@ class AddNotesActivity : AppCompatActivity() {
 
     private fun init() {
         onBackButtonPressed {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
             false
         }
-        notesDao = NotesDatabase.buildDatabase(this).getNotesDao()
-        addOrShow = intent.extras!!.getBoolean("AddOrShow")
-        whichItem = intent.extras!!.getInt("WhichItem")
+        val addOrShow = intent.extras!!.getBoolean("AddOrShow")
+        val whichItem = intent.extras!!.getInt("WhichItem")
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         viewModel.uiState.observe(this) { noteUiState ->
+            noteUiState.textEnable = true
             noteUiState.showOrAdd = addOrShow
             noteUiState.title = binding.edtTitle.text.toString()
             noteUiState.description = binding.edtDescription.text.toString()
             if (noteUiState.showOrAdd) {
                 if (noteUiState.title.isNotEmpty() && noteUiState.description.isNotEmpty()) {
-                    insertToDb(
-                        NotesData(
-                            title = noteUiState.title,
-                            description = noteUiState.description
-                        )
-                    )
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
                     showNotification()
                     finish()
                 } else {
@@ -68,23 +56,22 @@ class AddNotesActivity : AppCompatActivity() {
                         .show()
                 }
             } else {
-                noteUiState.title = notesDao.getAllNotes()[whichItem].title
-                noteUiState.description = notesDao.getAllNotes()[whichItem].description
+                noteUiState.textEnable = false
+                noteUiState.whichItem = whichItem
                 binding.btnSave.visibility = View.INVISIBLE
             }
         }
-
     }
 
-
-    private fun insertToDb(notesData: NotesData) {
-        notesDao.insertNotes(notesData)
+    override fun onResume() {
+        super.onResume()
+        viewModel.setData()
     }
 
     private fun showNotification() {
         val notification = NotificationCompat.Builder(this, channelId)
         notification.setSmallIcon(R.drawable.note_icon)
-        notification.setContentTitle("یادداشت")
+        notification.setContentTitle("Note")
         notification.setContentText("یادداشت با موفقیت ذخیره شد!!")
 
         val notificationManager =
