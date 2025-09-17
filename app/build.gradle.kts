@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -57,12 +58,13 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.neumorphism)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.preference.ktx)
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
     ksp(libs.androidx.room.compiler)
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     testImplementation(libs.junit)
