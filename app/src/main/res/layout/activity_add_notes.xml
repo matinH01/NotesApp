@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.note.viewModel.NotesViewModel" />
+            type="com.example.note.view_model.AddNotesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,12 +37,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/iran_yekan_mobile_extra_bold_number"
-            android:text="@{viewModel.uiState.topPageText}"
             android:textColor="@color/texts_color"
             android:textSize="@dimen/_28ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTextNewShow="@{viewModel.uiState.showOrAdd}" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edt_title"
@@ -51,6 +51,7 @@
             android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_14sdp"
+            android:enabled="@{viewModel.uiState.textEnable}"
             android:background="@drawable/add_note_edit_texts"
             android:elevation="@dimen/_3sdp"
             android:ems="10"
@@ -75,6 +76,7 @@
             android:layout_marginBottom="@dimen/_40sdp"
             android:background="@drawable/add_note_edit_texts"
             android:elevation="@dimen/_3sdp"
+            android:enabled="@{viewModel.uiState.textEnable}"
             android:fontFamily="@font/iran_yekan_mobile_bold_numerals"
             android:gravity="top|start"
             android:hint="@string/description"
