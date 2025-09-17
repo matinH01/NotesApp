@@ -1,5 +1,6 @@
 package com.example.note.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -9,11 +10,11 @@ import com.example.note.model.NotesData
 @Dao
 interface NotesDao {
     @Insert
-    fun insertNotes(note: NotesData)
+    suspend fun insertNotes(note: NotesData)
 
     @Query("SELECT * FROM notes")
-    fun getAllNotes(): MutableList<NotesData>
+     fun getAllNotes(): LiveData<MutableList<NotesData>>
 
     @Delete
-    fun deleteNotes(note: NotesData)
+    suspend fun deleteNotes(note: NotesData)
 }
