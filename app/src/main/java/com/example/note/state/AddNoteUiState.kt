@@ -1,8 +1,9 @@
 package com.example.note.state
 
-data class NoteUiState(
+data class AddNoteUiState(
     var title: String = "",
     var description: String = "",
     var showOrAdd: Boolean = true,
-    var topPageText: String = "یادداشت جدید"
+    var textEnable: Boolean = false,
+    var whichItem: Int = -1
 )
