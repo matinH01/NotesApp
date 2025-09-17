@@ -21,13 +21,11 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: Editor
-    private lateinit var intent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         requestNotificationPermission()
-        intent = Intent(this, MainActivity::class.java)
         preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
         editor = preferences.edit()     
         editor.apply()
@@ -53,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                     if (userName == preferences.getString("saveUser", "")
                         && password == preferences.getString("savePassword", "")
                     ) {
-                        goMainActivity(userName)
+                        goMainActivity()
                     } else {
                         snackBar(getString(R.string.pass_user_wrong))
                     }
@@ -62,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("savePassword", password).apply()
                     editor.putBoolean("appOpenBefore", true).apply()
                     // intents from this activity to MainActivity
-                    goMainActivity(userName)
+                    goMainActivity()
                 }
             }
         }
@@ -78,8 +76,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goMainActivity(userName: String) {
-        intent.putExtra("userName", userName)
+    private fun goMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -96,5 +94,3 @@ class LoginActivity : AppCompatActivity() {
         snackBar.show()
     }
 }
-
-
