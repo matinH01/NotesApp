@@ -1,8 +1,6 @@
 package com.example.note.adapter
 
-import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat.getString
 import androidx.databinding.BindingAdapter
 import com.example.note.R
