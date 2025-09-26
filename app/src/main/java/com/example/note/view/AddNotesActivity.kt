@@ -14,7 +14,6 @@ import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import com.example.note.R
-import com.example.note.dao.NotesDao
 import com.example.note.databinding.ActivityAddNotesBinding
 import com.example.note.view_model.AddNotesViewModel
 import dagger.hilt.android.AndroidEntryPoint
