@@ -14,7 +14,6 @@ import com.example.note.adapter.MyAdapter
 import com.example.note.databinding.ActivityMainBinding
 import com.example.note.view_model.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
