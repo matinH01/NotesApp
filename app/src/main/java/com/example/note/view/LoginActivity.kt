@@ -39,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
             }
             edtUsername.addTextChangedListener { text ->
                 viewModel!!.onUsernameChanged(text.toString())
-                Log.d("322323", text.toString())
             }
         }
 
