@@ -31,10 +31,6 @@ class AddNotesActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        onBackButtonPressed {
-            finish()
-            false
-        }
         val addOrShow = intent.extras!!.getBoolean("AddOrShow")
         val whichItem = intent.extras!!.getInt("WhichItem")
 
@@ -94,22 +90,5 @@ class AddNotesActivity : AppCompatActivity() {
                 }
             notificationManager.createNotificationChannel(channel)
         }
-    }
-
-    private fun onBackButtonPressed(callback: (() -> Boolean)) {
-        (this as? FragmentActivity)?.onBackPressedDispatcher?.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (!callback()) {
-                        remove()
-                        performBackPress()
-                    }
-                }
-            })
-    }
-
-    fun performBackPress() {
-        (this as? FragmentActivity)?.onBackPressedDispatcher?.onBackPressed()
     }
 }
